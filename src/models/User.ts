@@ -2,7 +2,12 @@ interface UserProps {
   name?: string;
   age?: number;
 }
+//type alias for callback function
+type Callback = () => void;
+
 export class User {
+  events: { [keys: string]: Callback[] } = {};
+
   constructor(private data: UserProps) {}
 
   get(propName: string): string | number {
@@ -11,5 +16,19 @@ export class User {
   set(update: UserProps): void {
     // this.data = { ...this.data, ...update };
     Object.assign(this.data, update);
+  }
+  on(eventName: string, callback: Callback): void {
+    const handlers = this.events[eventName] || [];
+    handlers.push(callback);
+    this.events[eventName] = handlers;
+  }
+  trigger(eventName: string): void {
+    const handlers = this.events[eventName];
+    if (!handlers || handlers.length === 0) {
+      return;
+    }
+    handlers.forEach((callback) => {
+      callback();
+    });
   }
 }

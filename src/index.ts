@@ -1,19 +1,10 @@
 import { User } from "./models/User";
-
+import axios from "axios";
 const user = new User({ name: "Ryan", age: 38 });
 
-user.set({ name: "Test", age: 20 });
+// axios.post(`http://localhost:3000/users`, {
+//   name: "myName",
+//   age: 20,
+// });
 
-user.set({ name: "Ryan" });
-user.set({ age: 30 });
-
-console.log(user.get("name"));
-console.log(user.get("age"));
-
-//empty user
-const emptyUser = new User({});
-
-emptyUser.set({ age: 33 });
-emptyUser.set({ name: "Bob" });
-console.log(emptyUser.get("name"));
-console.log(emptyUser.get("age"));
+axios.get(`http://localhost:3000/users/1`);
