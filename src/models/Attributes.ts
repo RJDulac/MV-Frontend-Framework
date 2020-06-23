@@ -8,4 +8,7 @@ export class Attributes<T> {
     // this.data = { ...this.data, ...update };
     Object.assign(this.data, update);
   }
+  getAll(): T {
+    return this.data;
+  }
 }
