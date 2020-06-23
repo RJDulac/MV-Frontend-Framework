@@ -1,6 +1,6 @@
 import { User } from "./models/User";
 
-const user = new User({ id: 1, name: "Ryan", age: 0 });
+const user = User.buildUser({ id: 1 });
 
 user.on("change", () => {
   console.log(user);
@@ -8,3 +8,4 @@ user.on("change", () => {
 
 user.fetch();
 user.save();
+console.log(user.isAdminUser());
